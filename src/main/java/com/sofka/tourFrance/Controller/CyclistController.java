@@ -1,7 +1,9 @@
 package com.sofka.tourFrance.Controller;
 
 import com.sofka.tourFrance.Domain.Cyclist;
+import com.sofka.tourFrance.Domain.Team;
 import com.sofka.tourFrance.Service.CyclistService;
+import com.sofka.tourFrance.Service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,9 @@ public class CyclistController {
     @Autowired
     private CyclistService cyclistService;
 
+    @Autowired
+    private TeamService teamService;
+
     @GetMapping(value = "/all")
     public List<Cyclist> getCyclist(){
         return cyclistService.findAll();
@@ -25,8 +30,13 @@ public class CyclistController {
 
     @PostMapping(value = "/save")
     public ResponseEntity<Cyclist> saveCyclist(@RequestBody Cyclist cyclist){
-        Cyclist cyclistSave = cyclistService.save(cyclist);
-        return new ResponseEntity<>(cyclistSave, HttpStatus.OK);
+        Long idTeam = cyclist.getTeam().getId();
+        Optional<Team> team = teamService.findById(idTeam);
+        if (team.isPresent() && team.get().getCyclistsList().size()<8){
+            Cyclist cyclistSave = cyclistService.save(cyclist);
+            return new ResponseEntity<>(cyclistSave, HttpStatus.OK);
+        }
+        return new ResponseEntity<>(null,HttpStatus.NOT_MODIFIED);
     }
 
     @GetMapping(path = "/find/{id}")
