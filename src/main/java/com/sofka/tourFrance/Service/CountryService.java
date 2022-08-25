@@ -52,4 +52,9 @@ public class CountryService implements ICountry {
         Optional<Country> country = countryRepository.findById(id);
         return country.get().getTeamList();
     }
+
+    public Set<Team> getTeamsByCountryCode(String code){
+        Optional<Country> country = countryRepository.findByCodeCountry(code);
+        return country.get().getTeamList();
+    }
 }

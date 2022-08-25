@@ -64,4 +64,9 @@ public class CountryController {
         return countryService.getTeamsByCountry(id);
     }
 
+    @GetMapping(value = "/find/teams/code/{code}")
+    public Set<Team> getTeamsByCountryCode(@PathVariable String code){
+        return countryService.getTeamsByCountryCode(code);
+    }
+
 }
