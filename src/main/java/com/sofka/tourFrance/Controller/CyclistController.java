@@ -4,9 +4,11 @@ import com.sofka.tourFrance.Domain.Cyclist;
 import com.sofka.tourFrance.Domain.Team;
 import com.sofka.tourFrance.Service.CyclistService;
 import com.sofka.tourFrance.Service.TeamService;
+import com.sofka.tourFrance.utility.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,7 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/cyclist")
 public class CyclistController {
-
+    Response response = new Response();
     @Autowired
     private CyclistService cyclistService;
 
@@ -28,15 +30,25 @@ public class CyclistController {
         return cyclistService.findAll();
     }
 
-    @PostMapping(value = "/save")
-    public ResponseEntity<Cyclist> saveCyclist(@RequestBody Cyclist cyclist){
+    @PostMapping(path = "/save")
+    public ResponseEntity<Response> saveCyclist(@RequestBody Cyclist cyclist){
+
         Long idTeam = cyclist.getTeam().getId();
         Optional<Team> team = teamService.findById(idTeam);
-        if (team.isPresent() && team.get().getCyclistsList().size()<8){
-            Cyclist cyclistSave = cyclistService.save(cyclist);
-            return new ResponseEntity<>(cyclistSave, HttpStatus.OK);
+        try {
+            if (team.isPresent() && team.get().getCyclistsList().size() < 8) {
+                response.data = cyclistService.save(cyclist);
+                response.message = "Ciclista Almacenado Correctamente";
+
+                return new ResponseEntity<>(response, HttpStatus.OK);
+            }
+            response.message = "El equipo no existe o el equipo ya tiene la cantidad de cilcistas completo (8)";
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
+        }catch (Exception e){
+            response.message = e.getMessage();
+            return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
         }
-        return new ResponseEntity<>(null,HttpStatus.NOT_MODIFIED);
+
     }
 
     @GetMapping(path = "/find/{id}")

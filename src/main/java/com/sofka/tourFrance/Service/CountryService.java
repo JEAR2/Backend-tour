@@ -34,7 +34,7 @@ public class CountryService implements ICountry {
     }
 
     @Override
-    public Country update( Country country,Long id) {
+    public Country update( Country country) {
         return countryRepository.save(country);
     }
 

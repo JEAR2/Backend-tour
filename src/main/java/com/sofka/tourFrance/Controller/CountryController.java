@@ -40,7 +40,7 @@ public class CountryController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<Country> updateCountry(@RequestBody Country country,@PathVariable("id") Long id ){
 
-        return new ResponseEntity<Country>(countryService.save(country), HttpStatus.OK);
+        return new ResponseEntity<Country>(countryService.update(country), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")

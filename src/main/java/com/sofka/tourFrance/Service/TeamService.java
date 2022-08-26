@@ -4,6 +4,8 @@ import com.sofka.tourFrance.Domain.Cyclist;
 import com.sofka.tourFrance.Domain.Team;
 import com.sofka.tourFrance.Repository.ITeamRepository;
 import com.sofka.tourFrance.Service.interfaces.ITeam;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

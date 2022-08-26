@@ -9,6 +9,6 @@ public interface ICountry {
     List<Country> findAll();
     Optional<Country> findById(Long id);
     Country save(Country country);
-    Country update(Country country,Long id);
+    Country update(Country country);
     void delete(Long id);
 }
