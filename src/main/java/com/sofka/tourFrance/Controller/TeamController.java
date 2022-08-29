@@ -37,7 +37,7 @@ public class TeamController {
 
     @PutMapping(path = "/update/{id}")
     public ResponseEntity<Team> updateTeam(@RequestBody Team team, @PathVariable("id") Long id){
-        return new ResponseEntity<Team>(teamService.save(team),HttpStatus.OK);
+        return new ResponseEntity<Team>(teamService.update(team),HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")
@@ -51,7 +51,7 @@ public class TeamController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "/findCyclists/{code}")
+    @GetMapping(value = "/find/cyclists/{code}")
     public Set<Cyclist> findCyclist(@PathVariable("code") String code){
         return teamService.listCyclistCodeTeam(code);
     }

@@ -59,7 +59,7 @@ public class CyclistController {
     @PutMapping(value = "/update/{id}")
     public ResponseEntity<Cyclist> updateCyclist(@RequestBody Cyclist cyclist,@PathVariable("id") Long id ){
 
-        return new ResponseEntity<Cyclist>(cyclistService.save(cyclist), HttpStatus.OK);
+        return new ResponseEntity<Cyclist>(cyclistService.update(cyclist), HttpStatus.OK);
     }
 
     @DeleteMapping(value = "/delete/{id}")
