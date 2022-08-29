@@ -9,6 +9,6 @@ public interface ICyclist {
     List<Cyclist> findAll();
     Optional<Cyclist> findById(Long id);
     Cyclist save(Cyclist cyclist);
-    Cyclist update(Long id, Cyclist cyclist);
+    Cyclist update(Cyclist cyclist);
     void delete(Long id);
 }

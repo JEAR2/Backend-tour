@@ -21,15 +21,21 @@ public class CountryController {
     private CountryService countryService;
 
     @GetMapping(value = "/all")
-    public List<Country> getCountry(){
+    public List<Country> getCountries(){
         return countryService.findAll();
     }
 
     @PostMapping(value = "/save")
     public ResponseEntity<Country> saveCountry(@RequestBody Country country){
         Country countryNSave =  countryService.save(country);
-        return new ResponseEntity<Country>(countryNSave, HttpStatus.OK);
+        return new ResponseEntity<>(countryNSave, HttpStatus.OK);
     }
+
+//    @PostMapping(value = "/save")
+//    public Country saveCountry(@RequestBody Country country){
+//        return countryService.save(country);
+//
+//    }
 
     @GetMapping(path = "/find/{id}")
     public Optional<Country> findCountryById(@PathVariable("id") Long id){
@@ -68,5 +74,6 @@ public class CountryController {
     public Set<Team> getTeamsByCountryCode(@PathVariable String code){
         return countryService.getTeamsByCountryCode(code);
     }
+
 
 }

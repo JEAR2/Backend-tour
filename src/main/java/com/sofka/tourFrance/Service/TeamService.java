@@ -33,7 +33,7 @@ public class TeamService implements ITeam {
     }
 
     @Override
-    public Team update(Long id, Team team) {
+    public Team update(Team team) {
         return iTeamRepository.save(team);
     }
 

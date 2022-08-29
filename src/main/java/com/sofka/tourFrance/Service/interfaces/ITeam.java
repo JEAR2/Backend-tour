@@ -9,6 +9,6 @@ public interface ITeam {
     List<Team> findAll();
     Optional<Team> findById(Long id);
     Team save(Team team);
-    Team update(Long id, Team team);
+    Team update(Team team);
     void delete(Long id);
 }

@@ -31,7 +31,7 @@ public class CyclistService implements ICyclist {
     }
 
     @Override
-    public Cyclist update(Long id, Cyclist cyclist) {
+    public Cyclist update(Cyclist cyclist) {
         return iCyclistRepository.save(cyclist);
     }
 

@@ -19,7 +19,7 @@ public class Country {
     private Long id;
     @Column(name = "name", length = 30, nullable = false, unique = true)
     private String name;
-    @Column(name = "code", length = 3, nullable = false,unique = true)
+    @Column(name = "codeCountry", length = 3, nullable = false,unique = true)
     private String codeCountry;
 
     @OneToMany(mappedBy = "country",cascade = CascadeType.ALL)
